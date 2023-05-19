@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chrome Popup</title>
+  <style>
+    body {
+      width: 300px;
+      height: 200px;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #logo {
+      display: block;
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      background-color: #f1f1f1;
+      /* Replace the URL below with the path to your logo image */
+      background-image: url('ab.jpg');
+      background-size: cover;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chrome Popup</h1>
+  <div id="logo"></div>
+  <form onsubmit="submitForm(event)">
+    <input type="text" id="searchInput" placeholder="Enter text">
+    <input type="submit" value="Submit">
+  </form>
+
+  <script src="background.js"></script>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      var searchInput = document.getElementById('searchInput').value;
+      chrome.runtime.sendMessage({ action: 'getItems', items: searchInput });
+    }
+  </script>
+</body>
+</html>
